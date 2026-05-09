@@ -4,8 +4,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Notas</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -23,7 +21,7 @@
     --red-bg: rgba(255,59,48,0.08);
     --radius: 14px;
     --radius-sm: 10px;
-    --font: -apple-system, 'SF Pro Display', BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -39,114 +37,47 @@
     }
   }
 
-  html, body {
-    height: 100%;
-    background: var(--bg);
-    font-family: var(--font);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    padding: 0;
-  }
-
-  .app {
-    max-width: 480px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 24px 16px 40px;
-    flex: 1;
-  }
-
-  .header {
-    padding: 0 4px 18px;
-  }
-
-  .header-top {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-  }
-
-  h1 {
-    font-size: 34px;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.5px;
-    line-height: 1;
-  }
-
-  .note-count {
-    font-size: 13px;
-    color: var(--text3);
-    margin-top: 4px;
-    font-weight: 400;
-  }
+  html, body { height: 100%; background: var(--bg); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  body { display: flex; flex-direction: column; min-height: 100vh; }
+  .app { max-width: 480px; width: 100%; margin: 0 auto; padding: 24px 16px 40px; flex: 1; }
+  .header { padding: 0 4px 18px; }
+  h1 { font-size: 34px; font-weight: 700; color: var(--text); letter-spacing: -0.5px; line-height: 1; }
+  .note-count { font-size: 13px; color: var(--text3); margin-top: 4px; }
 
   .add-row {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 12px 14px;
-    margin-bottom: 12px;
+    display: flex; gap: 10px; align-items: center;
+    background: var(--card); border-radius: var(--radius);
+    padding: 12px 14px; margin-bottom: 12px;
     border: 0.5px solid var(--border);
   }
 
   .add-row input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    font-family: var(--font);
-    font-size: 16px;
-    color: var(--text);
-    outline: none;
-    caret-color: var(--yellow);
+    flex: 1; border: none; background: transparent;
+    font-family: var(--font); font-size: 16px;
+    color: var(--text); outline: none; caret-color: var(--yellow);
   }
-
   .add-row input::placeholder { color: var(--text3); }
 
   .btn-add {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--yellow);
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: transform 0.12s, opacity 0.12s;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--yellow); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: transform 0.12s, opacity 0.12s;
   }
-
   .btn-add:active { transform: scale(0.88); opacity: 0.75; }
-
+  .btn-add:disabled { opacity: 0.4; cursor: default; }
   .btn-add svg { width: 16px; height: 16px; stroke: #1c1c1e; stroke-width: 2.5; }
 
-  .list {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
+  .list { display: flex; flex-direction: column; gap: 2px; }
 
   .note {
-    background: var(--card);
-    border-radius: var(--radius-sm);
+    background: var(--card); border-radius: var(--radius-sm);
     border: 0.5px solid var(--border);
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 13px 14px;
+    display: flex; align-items: flex-start;
+    gap: 12px; padding: 13px 14px;
     animation: slideDown 0.2s ease;
-    overflow: hidden;
     transition: opacity 0.15s, transform 0.15s;
   }
-
   .note:first-child { border-radius: var(--radius) var(--radius) var(--radius-sm) var(--radius-sm); }
   .note:last-child  { border-radius: var(--radius-sm) var(--radius-sm) var(--radius) var(--radius); }
   .note:only-child  { border-radius: var(--radius); }
@@ -157,86 +88,65 @@
   }
 
   .note-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
+    width: 32px; height: 32px; border-radius: 8px;
     background: var(--yellow-bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
-
   .note-icon svg { width: 16px; height: 16px; stroke: var(--yellow-dark); stroke-width: 1.8; fill: none; }
-
-  @media (prefers-color-scheme: dark) {
-    .note-icon svg { stroke: var(--yellow); }
-  }
+  @media (prefers-color-scheme: dark) { .note-icon svg { stroke: var(--yellow); } }
 
   .note-body { flex: 1; min-width: 0; }
-
-  .note-text {
-    font-size: 15px;
-    font-weight: 400;
-    color: var(--text);
-    line-height: 1.45;
-    word-break: break-word;
-  }
-
-  .note-time {
-    font-size: 12px;
-    color: var(--text3);
-    margin-top: 3px;
-  }
+  .note-text { font-size: 15px; color: var(--text); line-height: 1.45; word-break: break-word; }
+  .note-time { font-size: 12px; color: var(--text3); margin-top: 3px; }
 
   .btn-del {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text3);
-    transition: background 0.15s, color 0.15s;
-    flex-shrink: 0;
-    margin-top: 1px;
+    width: 26px; height: 26px; border-radius: 50%;
+    background: transparent; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text3); transition: background 0.15s, color 0.15s;
+    flex-shrink: 0; margin-top: 1px;
   }
-
   .btn-del:hover { background: var(--red-bg); color: var(--red); }
+  .btn-del:disabled { opacity: 0.3; cursor: default; }
   .btn-del svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2.2; }
 
   .empty {
-    text-align: center;
-    padding: 48px 20px;
-    color: var(--text3);
-    font-size: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    text-align: center; padding: 48px 20px;
+    color: var(--text3); font-size: 15px;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
   }
+  .empty svg { width: 40px; height: 40px; stroke: var(--text3); stroke-width: 1.2; fill: none; opacity: 0.4; }
 
-  .empty svg { width: 40px; height: 40px; stroke: var(--text3); stroke-width: 1.2; fill: none; opacity: 0.5; }
+  .status {
+    font-size: 12px; text-align: center; padding: 6px;
+    margin-bottom: 8px; border-radius: 8px; display: none;
+  }
+  .status.error { display: block; color: var(--red); background: var(--red-bg); }
+
+  .spinner {
+    width: 14px; height: 14px;
+    border: 2px solid rgba(0,0,0,0.15); border-top-color: #1c1c1e;
+    border-radius: 50%; animation: spin 0.6s linear infinite; display: none;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
 <div class="app">
   <div class="header">
-    <div class="header-top">
-      <h1>Notas</h1>
-    </div>
-    <p class="note-count" id="count">0 notas</p>
+    <h1>Notas</h1>
+    <p class="note-count" id="count">carregando...</p>
   </div>
+
+  <div class="status" id="status"></div>
 
   <div class="add-row">
     <input type="text" id="input" placeholder="Nova nota..." maxlength="300" />
-    <button class="btn-add" onclick="add()" aria-label="Adicionar">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+    <button class="btn-add" id="addBtn" onclick="add()" aria-label="Adicionar">
+      <svg id="addIcon" viewBox="0 0 24 24" fill="none">
+        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
       </svg>
+      <div class="spinner" id="addSpinner"></div>
     </button>
   </div>
 
@@ -244,25 +154,43 @@
 </div>
 
 <script>
-const KEY = 'ios-notes-v1';
-let notes = JSON.parse(localStorage.getItem(KEY) || '[]');
-let nid = notes.length ? Math.max(...notes.map(n => n.id)) + 1 : 1;
+const SB_URL = 'https://mmoflridotedgpbdeqim.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tb2Zscmlkb3RlZGdwYmRlcWltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzMzA5MTIsImV4cCI6MjA5MzkwNjkxMn0.jIDdWKbt6vWtP-v33gavui0arBimccmf67JBPiZeKTU';
+const HDRS = {
+  'apikey': SB_KEY,
+  'Authorization': 'Bearer ' + SB_KEY,
+  'Content-Type': 'application/json',
+  'Prefer': 'return=representation'
+};
 
-function save() { localStorage.setItem(KEY, JSON.stringify(notes)); }
+let notes = [];
 
-function timeStr() {
-  return new Date().toLocaleString('pt-BR', {
-    day: '2-digit', month: '2-digit',
-    hour: '2-digit', minute: '2-digit'
-  });
+async function api(path, opts = {}) {
+  const r = await fetch(SB_URL + '/rest/v1/' + path, { headers: HDRS, ...opts });
+  if (!r.ok) throw new Error(await r.text());
+  const txt = await r.text();
+  return txt ? JSON.parse(txt) : null;
 }
 
 function escHtml(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+function fmtDate(iso) {
+  return new Date(iso).toLocaleString('pt-BR', {
+    day: '2-digit', month: '2-digit',
+    hour: '2-digit', minute: '2-digit'
+  });
+}
+
+function setStatus(msg) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = 'status' + (msg ? ' error' : '');
+}
+
 function render() {
-  const list = document.getElementById('list');
+  const list  = document.getElementById('list');
   const count = document.getElementById('count');
   count.textContent = notes.length === 1 ? '1 nota' : notes.length + ' notas';
   list.innerHTML = '';
@@ -275,7 +203,7 @@ function render() {
     return;
   }
 
-  notes.forEach((n, i) => {
+  notes.forEach(n => {
     const div = document.createElement('div');
     div.className = 'note';
     div.dataset.id = n.id;
@@ -285,9 +213,9 @@ function render() {
       </div>
       <div class="note-body">
         <div class="note-text">${escHtml(n.text)}</div>
-        <div class="note-time">${n.time}</div>
+        <div class="note-time">${fmtDate(n.created_at)}</div>
       </div>
-      <button class="btn-del" onclick="remove(${n.id})" aria-label="Remover">
+      <button class="btn-del" onclick="remove('${n.id}', this)" aria-label="Remover">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     `;
@@ -295,25 +223,61 @@ function render() {
   });
 }
 
-function add() {
-  const input = document.getElementById('input');
-  const text = input.value.trim();
-  if (!text) return;
-  notes.unshift({ id: nid++, text, time: timeStr() });
-  save(); render();
-  input.value = '';
-  input.focus();
+async function load() {
+  try {
+    notes = await api('notes?select=*&order=created_at.desc');
+    setStatus('');
+    render();
+  } catch(e) {
+    setStatus('Erro ao carregar. Verifique a conexão.');
+    document.getElementById('count').textContent = 'erro';
+  }
 }
 
-function remove(id) {
+async function add() {
+  const input = document.getElementById('input');
+  const btn   = document.getElementById('addBtn');
+  const icon  = document.getElementById('addIcon');
+  const spin  = document.getElementById('addSpinner');
+  const text  = input.value.trim();
+  if (!text) return;
+
+  btn.disabled = true;
+  icon.style.display = 'none';
+  spin.style.display = 'block';
+  setStatus('');
+
+  try {
+    const [created] = await api('notes', {
+      method: 'POST',
+      body: JSON.stringify({ text })
+    });
+    notes.unshift(created);
+    input.value = '';
+    render();
+  } catch(e) {
+    setStatus('Erro ao salvar nota.');
+  } finally {
+    btn.disabled = false;
+    icon.style.display = 'block';
+    spin.style.display = 'none';
+    input.focus();
+  }
+}
+
+async function remove(id, btn) {
+  btn.disabled = true;
   const el = document.querySelector(`.note[data-id="${id}"]`);
-  if (el) {
-    el.style.opacity = '0';
-    el.style.transform = 'translateX(16px)';
-    setTimeout(() => {
-      notes = notes.filter(n => n.id !== id);
-      save(); render();
-    }, 150);
+  if (el) { el.style.opacity = '0'; el.style.transform = 'translateX(16px)'; }
+
+  try {
+    await api(`notes?id=eq.${id}`, { method: 'DELETE' });
+    notes = notes.filter(n => n.id !== id);
+    render();
+  } catch(e) {
+    if (el) { el.style.opacity = '1'; el.style.transform = ''; }
+    btn.disabled = false;
+    setStatus('Erro ao remover nota.');
   }
 }
 
@@ -321,7 +285,7 @@ document.getElementById('input').addEventListener('keydown', e => {
   if (e.key === 'Enter') add();
 });
 
-render();
+load();
 </script>
 </body>
 </html>
